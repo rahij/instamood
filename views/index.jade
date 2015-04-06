@@ -2,8 +2,10 @@ extends layout
 
 block content
   div
-    h2 Clarke Quay Area
+    h2 Latitude: #{lat}, Longitude: #{lng}
   div#content
+    h3 General Mood Here: #{mood}
+    h4 Top 10 hashtags: #{top_tags}
     ul#image-list
       each media in media_list
         li

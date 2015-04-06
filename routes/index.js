@@ -11,11 +11,41 @@ ig.use({
 });
 
 router.get('/', function(req, res, next) {
-  var lat = 1.29088;
-  var lng = 103.84444;
+  var lat = parseFloat(req.query['lat']) || 1.301778;
+  var lng = parseFloat(req.query['lng']) || 103.772208;
 
-  ig.media_search(lat, lng, {count: 20}, function(err, media, remaining, limit) {
-    res.render('index', {'media_list': media});
+  var min_timestamp = 1427626800;
+  var max_timestamp = 1427659200;
+
+  ig.media_search(
+    lat,
+    lng,
+    {
+      min_timestamp: min_timestamp,
+      max_timestamp: max_timestamp,
+      count: 50
+    }, function(err, media_list, remaining, limit) {
+
+    var freq = {}
+    hashtags = media_list.map(function(media){
+      media['tags'].map(function(tag){
+        if(tag in freq) {
+          freq[tag] += 1
+        }
+        else {
+          freq[tag] = 0
+        }
+      })
+    });
+
+    sorted_tags = Object.keys(freq).sort(function(a,b){return freq[b]-freq[a]});
+    res.render('index', {
+      lat: lat,
+      lng: lng,
+      media_list: media_list,
+      mood: 'Sad',
+      top_tags: sorted_tags.slice(0, 9).join(', ')
+    });
   });
 });
 
