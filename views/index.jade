@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  div
+    h2 Clarke Quay Area
+  div#content
+    ul#image-list
+      each media in media_list
+        li
+          img.insta-image(src="#{media['images']['standard_resolution']['url']}")

@@ -1,0 +1,22 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#image-list {
+  list-style-type: none;
+}
+
+#image-list li {
+  float: left;
+  margin-right: 10px;
+}
+
+.insta-image {
+  width: 300px;
+  border: 1px solid #000;
+}
