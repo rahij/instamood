@@ -16,6 +16,13 @@ a {
   margin-right: 10px;
 }
 
+.hashtags {
+  position: absolute;
+  z-index: 5;
+  background-color: #000;
+  color: #fff;
+}
+
 .insta-image {
   width: 300px;
   border: 1px solid #000;

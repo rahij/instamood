@@ -7,4 +7,6 @@ block content
     ul#image-list
       each media in media_list
         li
-          img.insta-image(src="#{media['images']['standard_resolution']['url']}")
+          div
+            - hashtags = media['tags'].join(', ')
+            img.insta-image(src="#{media['images']['standard_resolution']['url']}", title="#{hashtags}")
