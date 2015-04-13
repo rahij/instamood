@@ -1,10 +1,37 @@
 extends layout
 
+block additional-js
+  script(type="text/javascript",
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALQjbl5uNj2nes-fEylSMKWcKQ5qxRzp4")
+  script(type="text/javascript").
+    var map;
+    var markers = [];
+    function initialize() {
+      var mapOptions = {
+        center: { lat: 1.301778, lng: 103.772208},
+        zoom: 12
+      };
+      var locations = !{JSON.stringify(location_list)}
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+      render_markers(locations)
+    }
+
+    function render_markers(locations) {
+      for(var i = 0; i < locations.length; ++i) {
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
+          map: map
+        });
+        google.maps.event.addListener(marker, 'click', function(e) {
+          window.location = "/stream?lat=" + e.latLng.lat() + "&lng=" + e.latLng.lng()
+        });
+      }
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+
 block content
   div#content
-    h4 Choose a location
-    ul
-      each loc in location_list
-        li
-          a(href="/stream?lat=#{loc['lat']}&lng=#{loc['lng']}")
-            =loc['name']
+    h4 Click on a location
+    #map-canvas
