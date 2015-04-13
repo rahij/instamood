@@ -11,6 +11,12 @@ ig.use({
 });
 
 router.get('/', function(req, res, next) {
+  res.render('index', {
+    location_list: YAML.load('locations.yaml')
+  });
+});
+
+router.get('/stream', function(req, res, next) {
   var lat = parseFloat(req.query['lat']) || 1.301778;
   var lng = parseFloat(req.query['lng']) || 103.772208;
 
@@ -21,8 +27,8 @@ router.get('/', function(req, res, next) {
     lat,
     lng,
     {
-      min_timestamp: min_timestamp,
-      max_timestamp: max_timestamp,
+      // min_timestamp: min_timestamp,
+      // max_timestamp: max_timestamp,
       count: 50
     }, function(err, media_list, remaining, limit) {
 
@@ -39,11 +45,11 @@ router.get('/', function(req, res, next) {
     });
 
     sorted_tags = Object.keys(freq).sort(function(a,b){return freq[b]-freq[a]});
-    res.render('index', {
+    res.render('stream', {
       lat: lat,
       lng: lng,
       media_list: media_list,
-      mood: 'Sad',
+      mood: 'Sad', // TODO: jin zhe
       top_tags: sorted_tags.slice(0, 9).join(', ')
     });
   });

@@ -19,7 +19,7 @@ a {
 .hashtags {
   position: absolute;
   z-index: 5;
-  background-color: #000;
+  background-color: transparent;
   color: #fff;
 }
 

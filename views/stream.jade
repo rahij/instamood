@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  div
+    h2 Latitude: #{lat}, Longitude: #{lng}
+  div#content
+    h3 General Mood Here: #{mood}
+    h4 Top 10 keywords: #{top_tags}
+    ul#image-list
+      each media in media_list
+        li
+          div
+            - hashtags = media['tags'].join(', ')
+            img.insta-image(src="#{media['images']['standard_resolution']['url']}", title="#{hashtags}")

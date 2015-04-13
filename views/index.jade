@@ -1,14 +1,10 @@
 extends layout
 
 block content
-  div
-    h2 Latitude: #{lat}, Longitude: #{lng}
   div#content
-    h3 General Mood Here: #{mood}
-    h4 Top 10 hashtags: #{top_tags}
-    ul#image-list
-      each media in media_list
+    h4 Choose a location
+    ul
+      each loc in location_list
         li
-          div
-            - hashtags = media['tags'].join(', ')
-            img.insta-image(src="#{media['images']['standard_resolution']['url']}", title="#{hashtags}")
+          a(href="/stream?lat=#{loc['lat']}&lng=#{loc['lng']}")
+            =loc['name']
