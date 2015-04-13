@@ -19,14 +19,19 @@ block additional-js
 
     function render_markers(locations) {
       for(var i = 0; i < locations.length; ++i) {
-        var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(locations[i].lat, locations[i].lng),
-          map: map
-        });
-        google.maps.event.addListener(marker, 'click', function(e) {
-          window.location = "/stream?lat=" + e.latLng.lat() + "&lng=" + e.latLng.lng()
-        });
+        create_marker(locations[i])
       }
+    }
+
+    function create_marker(location) {
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(location.lat, location.lng),
+        map: map,
+        title: location.name
+      });
+      google.maps.event.addListener(marker, 'click', function(e) {
+        window.location = "/stream/" + location.name
+      });
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);

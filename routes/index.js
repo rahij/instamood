@@ -4,6 +4,7 @@ var ig = require('instagram-node').instagram();
 var YAML = require('yamljs');
 
 var config = YAML.load('config.yaml');
+var location_list = YAML.load('locations.yaml');
 
 ig.use({
   client_id: config['instagram']['client_id'],
@@ -12,13 +13,23 @@ ig.use({
 
 router.get('/', function(req, res, next) {
   res.render('index', {
-    location_list: YAML.load('locations.yaml')
+    location_list: location_list
   });
 });
 
-router.get('/stream', function(req, res, next) {
-  var lat = parseFloat(req.query['lat']) || 1.301778;
-  var lng = parseFloat(req.query['lng']) || 103.772208;
+router.get('/stream/:loc', function(req, res, next) {
+  var location_name = 'NUS';
+  var lat = 1.301778
+  var lng = 103.772208;
+
+  for(var i = 0; i < location_list.length; ++i) {
+    if(location_list[i].name == req.params['loc']) {
+      lat = location_list[i].lat;
+      lng = location_list[i].lng;
+      location_name = req.params['loc'];
+      break;
+    }
+  }
 
   var min_timestamp = 1427626800;
   var max_timestamp = 1427659200;
@@ -48,6 +59,7 @@ router.get('/stream', function(req, res, next) {
     res.render('stream', {
       lat: lat,
       lng: lng,
+      location_name: location_name,
       media_list: media_list,
       mood: 'Sad', // TODO: jin zhe
       top_tags: sorted_tags.slice(0, 9).join(', ')
