@@ -1,15 +1,11 @@
 -
-  name: "NUS"
-  lat: 1.301778
-  lng: 103.772208
+  name: "NUS School of Computing"
+  lat: 1.295348
+  lng: 103.773900
 -
-  name: "Clarke Quay"
-  lat: 1.290882
-  lng: 103.844443
--
-  name: "Arab St"
-  lat: 1.302746
-  lng: 103.857802
+  name: "Parliment"
+  lat: 1.288715
+  lng: 103.850450
 -
   name: "Orchard"
   lat: 1.304842
@@ -19,6 +15,6 @@
   lat: 1.249404
   lng: 103.830321
 -
-  name: "CBD"
-  lat: 1.280094
-  lng: 103.850949
+  name: "NTU School of Computer Engineering"
+  lat: 1.347715
+  lng: 103.682146
