@@ -35,6 +35,8 @@ block additional-js
     }
 
     google.maps.event.addDomListener(window, 'load', initialize);
+    var emotions = !{JSON.stringify(emotions_by_location)}
+    console.log(emotions);
 
 block content
   div#content

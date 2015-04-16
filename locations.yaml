@@ -1,11 +1,11 @@
 -
   name: "NUS School of Computing"
   lat: 1.295348
-  lng: 103.773900
+  lng: 103.7739
 -
   name: "Parliament"
   lat: 1.288715
-  lng: 103.850450
+  lng: 103.85045
 -
   name: "Orchard"
   lat: 1.304842
@@ -20,5 +20,5 @@
   lng: 103.682146
 -
   name: "SAFTI Military Institute"
-  lat: 1.334330
+  lat: 1.33433
   lng: 103.680643
