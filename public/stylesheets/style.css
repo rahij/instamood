@@ -4,7 +4,9 @@ html, body {
   background: #e0e1e2 url(https://instagramstatic-a.akamaihd.net/bluebar/5021840/images/shared/noise-2.png);
   margin: 0;
 }
-
+body *{
+  font-family: Arial;
+}
 #map-canvas {
   height: 100%;
   width: 100%;
@@ -29,6 +31,7 @@ html, body {
 
 #hint {
   padding: 4px;
+  font-size: 22px;
   background-image: -webkit-linear-gradient(top,#f3f3f3,#ddd);
   text-align: center;
   color: rgb(102, 102, 102);
@@ -38,9 +41,10 @@ html, body {
 
 #info {
   padding: 4px;
-  background-image: -webkit-linear-gradient(top,#f3f3f3,#ddd);
+  background-color: rgba(255,255,255,.92);
   color: rgb(102, 102, 102);
-  border-color: #c6c6c6;
+  border-color: silver;
+  box-shadow: 1px 0 5px rgba(0,0,0,.3);
   border-bottom: 1px solid;
 }
 
@@ -48,12 +52,11 @@ html, body {
   position: absolute;
   left: 50%;
   margin-left: -50px!important;
-  height: 35px;
+  height: 21px;
   width: 97px;
   background: url("http://s13.postimg.org/s0uwqoifp/instamood_logo.png") no-repeat;
-  background-size: 97px 35px;
-  position: absolute;
-  top: 4px;
+  background-size: 97px 21px;
+  top: 11px;
   margin: 0;
   text-indent: -9999em;
 }
@@ -69,13 +72,20 @@ a {
 #image-list li {
   float: left;
   margin-right: 10px;
+  margin-bottom: 6px;
 }
 
 #image-list img {
   border-radius: 4px;
   box-shadow: 0 1px 16px rgba(0,0,0,.1);
+  opacity: 1;
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 }
-
+#image-list img:hover{
+  opacity: 0.7;
+}
 .hashtags {
   position: absolute;
   z-index: 5;
@@ -85,5 +95,5 @@ a {
 
 .insta-image {
   width: 300px;
-  border: 1px solid #000;
+  border: 1px solid silver;
 }
