@@ -1,11 +1,13 @@
 extends layout
 
 block content
-  div
+  div#top-bar
+    div#logo
+  div#info
     h2 #{location_name}
-  div#content
     h3 General Mood Here: #{emotion}
     h4 Top 10 keywords: #{top_tags}
+  div#content
     ul#image-list
       each media in media_list
         li

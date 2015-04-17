@@ -1,6 +1,8 @@
 html, body {
-  height: 100%  ;
+  height: 100% ;
   width: 100%;
+  background: #e0e1e2 url(https://instagramstatic-a.akamaihd.net/bluebar/5021840/images/shared/noise-2.png);
+  margin: 0;
 }
 
 #map-canvas {
@@ -15,6 +17,47 @@ html, body {
   height: 600px;
 }
 
+#top-bar {
+  text-align: center;
+  height: 43px;
+  border-bottom: 1px solid #1c5380;
+  border-bottom-color: rgba(4,40,71,.8);
+  box-shadow: 0 1px 0 rgba(111,151,182,.5)inset,0 -1px 0 rgba(111,151,182,.2)inset,0 1px 1px rgba(0,0,0,.2);
+  background-color: #517fa4;
+  background-image: url("//instagramstatic-a.akamaihd.net/bluebar/5021840/images/shared/noise-1.png"),-webkit-linear-gradient(top,#517fa4,#306088);
+}
+
+#hint {
+  padding: 4px;
+  background-image: -webkit-linear-gradient(top,#f3f3f3,#ddd);
+  text-align: center;
+  color: rgb(102, 102, 102);
+  border-color: #c6c6c6;
+  border-bottom: 1px solid;
+}
+
+#info {
+  padding: 4px;
+  background-image: -webkit-linear-gradient(top,#f3f3f3,#ddd);
+  color: rgb(102, 102, 102);
+  border-color: #c6c6c6;
+  border-bottom: 1px solid;
+}
+
+#logo {
+  position: absolute;
+  left: 50%;
+  margin-left: -50px!important;
+  height: 35px;
+  width: 97px;
+  background: url("http://s13.postimg.org/s0uwqoifp/instamood_logo.png") no-repeat;
+  background-size: 97px 35px;
+  position: absolute;
+  top: 4px;
+  margin: 0;
+  text-indent: -9999em;
+}
+
 a {
   color: #00B7FF;
 }
@@ -26,6 +69,11 @@ a {
 #image-list li {
   float: left;
   margin-right: 10px;
+}
+
+#image-list img {
+  border-radius: 4px;
+  box-shadow: 0 1px 16px rgba(0,0,0,.1);
 }
 
 .hashtags {
