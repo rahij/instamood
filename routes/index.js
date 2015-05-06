@@ -73,7 +73,6 @@ router.get('/stream/:loc', function(req, res, next) {
       media_list.sort(media_compare);
 
       media_list.map(function(media){
-        console.log(new Date(media['created_time'] * 1000));
         media['tags'].map(function(tag){
           if(tag in freq) {
             freq[tag] += 1
@@ -83,19 +82,28 @@ router.get('/stream/:loc', function(req, res, next) {
           }
         })
         // Classification
+        post_data = {data: {
+          lat: lat,
+          lng: lng,
+          likes_count: media['likes']['count'],
+          comments_data: media['comments']['data'],
+          tags: media['tags'],
+          filter_used: media['filter'],
+          caption: media['caption']
+        }};
+        result = '';
+        result_val = 0;
         request.post({
           url: config['api']['url'] + 'classify_media',
-          form: {
-            lat: lat,
-            lng: lng,
-            likes_count: media['likes']['count'],
-            comments_data: media['comments']['data'],
-            tags: media['tags'],
-            filter_used: media['filter'],
-            caption: media['caption']
-          }},
+          json: true,
+          body: post_data},
           function(err, response, body) {
-            emotion = (JSON.parse(body)['classification'] == '' ? emotions_by_location[location_name] : JSON.parse(body)['classification']);
+            for(var emotion in body) {
+              if(body[emotion] > result_val) {
+                result = emotion;
+                result_val = body[emotion]
+              }
+            }
           }
         );
       });
@@ -104,14 +112,14 @@ router.get('/stream/:loc', function(req, res, next) {
 
       // temp hack
       interval = setInterval(function(){
-        if(emotion != '') {
+        if(result != '') {
           clearInterval(interval);
           res.render('stream', {
             lat: lat,
             lng: lng,
             location_name: location_name,
             media_list: media_list,
-            emotion: emotion,
+            emotion: result,
             top_tags: sorted_tags.slice(0, 9).join(', ')
           });
         }
