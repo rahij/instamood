@@ -17,6 +17,14 @@ function get_location_from_lat_lng(lat, lng) {
   return null;
 }
 
+function media_compare(a,b) {
+  if (a['created_time'] < b['created_time'])
+     return 1;
+  if (a['created_time'] > b['created_time'])
+    return -1;
+  return 0;
+}
+
 ig.use({
   client_id: config['instagram']['client_id'],
   client_secret: config['instagram']['client_secret']
@@ -52,18 +60,20 @@ router.get('/stream/:loc', function(req, res, next) {
 
   var min_timestamp = 1427626800;
   var max_timestamp = 1427659200;
-
   ig.media_search(
     lat,
     lng,
     {
-      // min_timestamp: min_timestamp,
+      min_timestamp: ((new Date().getTime() - (4 * 60 * 60 * 1000))/1000.0),
       // max_timestamp: max_timestamp,
       count: 50
     }, function(err, media_list, remaining, limit) {
       var freq = {};
       var emotion = '';
+      media_list.sort(media_compare);
+
       media_list.map(function(media){
+        console.log(new Date(media['created_time'] * 1000));
         media['tags'].map(function(tag){
           if(tag in freq) {
             freq[tag] += 1
@@ -79,14 +89,13 @@ router.get('/stream/:loc', function(req, res, next) {
             lat: lat,
             lng: lng,
             likes_count: media['likes']['count'],
-            comments_data: [],
+            comments_data: media['comments']['data'],
             tags: media['tags'],
             filter_used: media['filter'],
             caption: media['caption']
           }},
           function(err, response, body) {
             emotion = (JSON.parse(body)['classification'] == '' ? emotions_by_location[location_name] : JSON.parse(body)['classification']);
-
           }
         );
       });
